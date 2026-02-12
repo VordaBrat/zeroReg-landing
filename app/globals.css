@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #111111;
+  --color-bg-card: #161616;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-text: #e5e5e5;
+  --color-text-muted: #666666;
+  --color-accent: #ffffff;
+  --color-gold: #f0c14b;
+  --color-gold-dim: rgba(240, 193, 75, 0.15);
+  --color-red: #ef4444;
+  --color-green: #4ade80;
 
-:root {
-  --bg: #0a0a0a;
-  --bg-elevated: #111;
-  --bg-card: #161616;
-  --border: rgba(255, 255, 255, 0.08);
-  --text: #e5e5e5;
-  --text-muted: #666;
-  --accent: #fff;
-  --gold: #f0c14b;
-  --gold-dim: rgba(240, 193, 75, 0.15);
-  --red: #ef4444;
-  --green: #4ade80;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --font-sans:
+    "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Crimson Pro", Georgia, serif;
+  --font-mono: "DM Mono", monospace;
 }
 
 html {
@@ -25,24 +24,15 @@ html {
 }
 
 body {
-  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.5;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-code {
-  font-family: 'DM Mono', monospace;
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
