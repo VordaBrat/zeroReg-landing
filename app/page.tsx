@@ -1,4 +1,4 @@
-import { Navbar, Hero, CodeDemo } from "@/components";
+import { Navbar, Hero, CodeDemo, InstallCommand } from "@/components";
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
       <main>
         <Hero />
         <CodeDemo />
-        {/* <InstallCommand /> */}
+        <InstallCommand />
       </main>
       {/* <Footer /> */}
     </>

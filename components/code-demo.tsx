@@ -40,7 +40,7 @@ export function CodeDemo() {
             content: (
               <>
                 {keyword("import")} {"{ email }"} {keyword("from")}{" "}
-                {string("'rexi/patterns'")}
+                {string("'zeroReg/patterns'")}
               </>
             ),
           },
@@ -61,7 +61,7 @@ export function CodeDemo() {
         ]}
         footer={{
           text: "Your future self will thank you",
-          label: "rexi v1.0",
+          label: "zeroReg v1.0",
         }}
       />
 
@@ -84,7 +84,7 @@ export function CodeDemo() {
             content: (
               <>
                 {keyword("import")} {"{ digit, literal, optional }"}{" "}
-                {keyword("from")} {string("'rexi'")}
+                {keyword("from")} {string("'zeroReg'")}
               </>
             ),
           },

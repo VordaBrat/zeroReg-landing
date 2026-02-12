@@ -16,7 +16,7 @@ export function Hero() {
       </h1>
 
       <p className="text-lg text-text-muted max-w-md mb-10 leading-relaxed">
-        Meet <strong className="text-text font-semibold">rexi</strong> — write
+        Meet <strong className="text-text font-semibold">zeroReg</strong> — write
         regex without{" "}
         <em className="italic font-semibold text-text underline decoration-wavy decoration-red decoration-2 underline-offset-4">
           tears
