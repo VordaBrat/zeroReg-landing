@@ -1,8 +1,4 @@
-import { type ClassValue, clsx } from "clsx";
 
-export function cn(...inputs: ClassValue[]) {
-  return clsx(inputs);
-}
 
 export async function copyToClipboard(text: string): Promise<boolean> {
   try {
