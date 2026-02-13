@@ -33,18 +33,18 @@ export function InstallCommand() {
         <button
           onClick={handleCopy}
           aria-label="Copy to clipboard"
-          className="p-2 rounded-md text-text-muted hover:text-text hover:bg-bg-elevated transition-all"
+          className="p-2 rounded-md text-text-muted cursor-pointer hover:text-text hover:bg-bg-elevated transition-all"
         >
           {copied ? <CheckIcon /> : <CopyIcon />}
         </button>
       </div>
 
-      <div className="flex items-center gap-1 bg-bg-card rounded-lg p-1">
+      <div className="flex items-center gap-1  bg-bg-card rounded-lg p-1">
         {PACKAGE_MANAGERS.map((pm) => (
           <button
             key={pm}
             onClick={() => setActivePM(pm)}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+            className={`px-4 py-2 text-sm cursor-pointer font-medium rounded-md transition-all ${
               activePM === pm
                 ? "bg-bg-elevated text-text"
                 : "text-text-muted hover:text-text"

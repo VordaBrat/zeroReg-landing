@@ -16,7 +16,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/zeroReg"><img src="https://img.shields.io/npm/v/zeroReg?style=flat-square&color=000&labelColor=000" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/zeroReg"><img src="https://img.shields.io/npm/dm/zeroReg?style=flat-square&color=000&labelColor=000" alt="npm downloads" /></a>
-  <a href="https://github.com/yourusername/zeroReg/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000" alt="license" /></a>
+  <a href="https://github.com/zenweb3/zeroReg/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000" alt="license" /></a>
   <a href="https://bundlephobia.com/package/zeroReg"><img src="https://img.shields.io/bundlephobia/minzip/zeroReg?style=flat-square&color=000&labelColor=000&label=size" alt="bundle size" /></a>
 </p>
 
@@ -266,7 +266,7 @@ Contributions are welcome! Please read our [contributing guide](CONTRIBUTING.md)
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/zeroReg.git
+git clone https://github.com/zenweb3/zeroReg.git
 
 # Install dependencies
 pnpm install

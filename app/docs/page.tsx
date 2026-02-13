@@ -60,7 +60,7 @@ export default function DocsPage() {
           Back to Home
         </Link>
         <a
-          href="https://github.com/yourusername/zeroReg"
+          href="https://github.com/zenweb3/zeroReg"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 border border-border text-text-muted rounded-md font-medium hover:border-text-muted hover:text-text transition-all"
