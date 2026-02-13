@@ -16,7 +16,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/zeroReg"><img src="https://img.shields.io/npm/v/zeroReg?style=flat-square&color=000&labelColor=000" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/zeroReg"><img src="https://img.shields.io/npm/dm/zeroReg?style=flat-square&color=000&labelColor=000" alt="npm downloads" /></a>
-  <a href="https://github.com/zenweb3/zeroReg/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000" alt="license" /></a>
+  <a href="https://github.com/zenweb3/zeroReg-landidng/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000" alt="license" /></a>
   <a href="https://bundlephobia.com/package/zeroReg"><img src="https://img.shields.io/bundlephobia/minzip/zeroReg?style=flat-square&color=000&labelColor=000&label=size" alt="bundle size" /></a>
 </p>
 
@@ -289,5 +289,5 @@ MIT © [Zen](https://github.com/zenweb3)
 </p>
 
 <p align="center">
-  <a href="https://github.com/zenweb3/zeroReg">⭐ Star us on GitHub</a>
+  <a href="https://github.com/zenweb3/zeroReg-landing">⭐ Star us on GitHub</a>
 </p>

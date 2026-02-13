@@ -9,6 +9,6 @@ export const INSTALL_COMMANDS = {
 
 export type PackageManager = keyof typeof INSTALL_COMMANDS;
 
-export const GITHUB_URL = "https://github.com/zenweb3/zeroReg";
+export const GITHUB_URL = "https://github.com/zenweb3/zeroReg-landing";
 export const NPM_URL = "https://npmjs.com/package/zeroReg";
 export const DOCS_URL = "/docs";
