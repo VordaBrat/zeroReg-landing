@@ -18,7 +18,7 @@ export default function DocsPage() {
         {/* Quick Start */}
         <section id="quickstart" className="mb-20">
           <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span> Quick Start
+            <span className="text-text-muted">#</span>Quick Start
           </h2>
 
           <div className="space-y-6">
