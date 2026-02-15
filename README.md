@@ -14,10 +14,10 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/zeroReg"><img src="https://img.shields.io/npm/v/zeroReg?style=flat-square&color=000&labelColor=000" alt="npm version" /></a>
-  <a href="https://www.npmjs.com/package/zeroReg"><img src="https://img.shields.io/npm/dm/zeroReg?style=flat-square&color=000&labelColor=000" alt="npm downloads" /></a>
-  <a href="https://github.com/zenweb3/zeroReg-landing/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000" alt="license" /></a>
-  <a href="https://bundlephobia.com/package/zeroReg"><img src="https://img.shields.io/bundlephobia/minzip/zeroReg?style=flat-square&color=000&labelColor=000&label=size" alt="bundle size" /></a>
+  <a href="https://www.npmjs.com/package/zeroreg"><img src="https://img.shields.io/npm/v/zeroreg?style=flat-square&color=000&labelColor=000" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/zeroreg"><img src="https://img.shields.io/npm/dm/zeroreg?style=flat-square&color=000&labelColor=000" alt="npm downloads" /></a>
+  <a href="https://github.com/zenweb3/zeroreg-landing/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000" alt="license" /></a>
+  <a href="https://bundlephobia.com/package/zeroreg"><img src="https://img.shields.io/bundlephobia/minzip/zeroreg?style=flat-square&color=000&labelColor=000&label=size" alt="bundle size" /></a>
 </p>
 
 <p align="center">
@@ -44,7 +44,7 @@ Your coworker asks what it does. You mass tears. You mass confusion. You mass qu
 ## The Solution
 
 ```js
-import { email } from 'zeroReg/patterns'
+import { email } from 'zeroreg/patterns'
 
 email.test('hello@world.com') // true
 
@@ -54,7 +54,7 @@ email.test('hello@world.com') // true
 Or build your own patterns like a normal person:
 
 ```js
-import { digit, literal, optional } from 'zeroReg'
+import { digit, literal, optional } from 'zeroreg'
 
 const phone = optional('+')
   .then(digit(3))
@@ -74,16 +74,16 @@ No PhD in hieroglyphics required.
 
 ```bash
 # npm
-npm install zeroReg
+npm install zeroreg
 
 # pnpm
-pnpm add zeroReg
+pnpm add zeroreg
 
 # yarn
-yarn add zeroReg
+yarn add zeroreg
 
 # bun
-bun add zeroReg
+bun add zeroreg
 ```
 
 ## API
@@ -151,7 +151,7 @@ digit(3)
 Pre-built patterns for common use cases:
 
 ```js
-import { email, url, phone, date, ipv4, hex, uuid } from 'zeroReg/patterns'
+import { email, url, phone, date, ipv4, hex, uuid } from 'zeroreg/patterns'
 
 email.test('test@example.com')           // true
 url.test('https://github.com')           // true
@@ -182,7 +182,7 @@ uuid.test('550e8400-e29b-41d4-a716-446655440000') // true
 ### Password Validation
 
 ```js
-import { digit, letter, special, any } from 'zeroReg'
+import { digit, letter, special, any } from 'zeroreg'
 
 const password = startOfLine()
   .then(lookahead(any().zeroOrMore().then(digit())))     // at least 1 digit
@@ -198,7 +198,7 @@ password.test('weak')        // false
 ### Extract Data
 
 ```js
-import { digit, capture } from 'zeroReg'
+import { digit, capture } from 'zeroreg'
 
 const datePattern = capture(digit(4), 'year')
   .then('-')
@@ -213,7 +213,7 @@ const match = datePattern.match('2024-03-15')
 ### URL Parser
 
 ```js
-import { capture, oneOf, word, any } from 'zeroReg'
+import { capture, oneOf, word, any } from 'zeroreg'
 
 const urlParser = capture(oneOf('http', 'https'), 'protocol')
   .then('://')
@@ -226,7 +226,7 @@ const urlParser = capture(oneOf('http', 'https'), 'protocol')
 Full TypeScript support out of the box:
 
 ```ts
-import { digit, literal, type Pattern } from 'zeroReg'
+import { digit, literal, type Pattern } from 'zeroreg'
 
 const phone: Pattern = digit(3).then('-').then(digit(4))
 
@@ -266,7 +266,7 @@ Contributions are welcome! Please read our [contributing guide](CONTRIBUTING.md)
 
 ```bash
 # Clone the repo
-git clone https://github.com/zenweb3/zeroReg.git
+git clone https://github.com/zenweb3/zeroreg.git
 
 # Install dependencies
 pnpm install
