@@ -1,92 +1,130 @@
+"use client";
+
 import Link from "next/link";
-import { Navbar } from "@/components";
+import { useState } from "react";
+
+type Language = "js" | "python";
+
 export default function DocsPage() {
+  const [lang, setLang] = useState<Language>("js");
+
   return (
     <div className="min-h-screen bg-bg">
-      <Navbar />
-      <div className="max-w-5xl mx-auto my-8  px-6 py-16">
-        <div className="mb-20">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href="/" className="font-bold text-lg">
+            zeroReg
+          </Link>
+          <nav className="flex items-center gap-6">
+            <Link href="/docs" className="text-sm text-text font-medium">
+              Docs
+            </Link>
+            <a
+              href="https://github.com/yourusername/zeroreg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-text-muted hover:text-text transition-colors"
+            >
+              GitHub
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <div className="max-w-5xl mx-auto px-6 py-16">
+        {/* Hero */}
+        <div className="mb-16">
           <h1 className="text-5xl sm:text-6xl font-black tracking-tight mb-4">
             Documentation
           </h1>
-          <p className="text-xl text-text-muted max-w-2xl">
-            Everything you need to write regex like a normal person. No PhD
-            required.
+          <p className="text-xl text-text-muted max-w-2xl mb-8">
+            Everything you need to write regex like a normal person. No PhD required.
           </p>
+          
+          {/* Global Language Toggle */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-text-muted mr-2">Language:</span>
+            <button
+              onClick={() => setLang("js")}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                lang === "js"
+                  ? "bg-bg-elevated text-text border border-border"
+                  : "text-text-muted hover:text-text"
+              }`}
+            >
+              JavaScript / TypeScript
+            </button>
+            <button
+              onClick={() => setLang("python")}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                lang === "python"
+                  ? "bg-bg-elevated text-text border border-border"
+                  : "text-text-muted hover:text-text"
+              }`}
+            >
+              Python
+            </button>
+          </div>
         </div>
 
         {/* Quick Start */}
         <section id="quickstart" className="mb-20">
           <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span>Quick Start
+            <span className="text-text-muted">#</span> Quick Start
           </h2>
-
+          
           <div className="space-y-6">
-            <CodeBlock>{`# npm
-npm install zeroreg
+            <div>
+              <h3 className="text-lg font-semibold mb-3">Installation</h3>
+              {lang === "js" ? (
+                <CodeBlock>{`npm install zeroreg
 
-# pnpm
+# or
 pnpm add zeroreg
-
-# yarn
 yarn add zeroreg
-
-# bun
 bun add zeroreg`}</CodeBlock>
+              ) : (
+                <CodeBlock>{`pip install zeroreg`}</CodeBlock>
+              )}
+            </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-3">Your first pattern</h3>
-              <CodeBlock>{`import { digit, literal } from 'zeroreg'
+              {lang === "js" ? (
+                <CodeBlock>{`import { digit } from 'zeroreg'
 
 // Match a phone number: 123-456-7890
 const phone = digit(3).then('-').then(digit(3)).then('-').then(digit(4))
 
 phone.test('123-456-7890')  // true
 phone.toRegex()             // /\\d{3}-\\d{3}-\\d{4}/`}</CodeBlock>
+              ) : (
+                <CodeBlock>{`from zeroreg import digit
+
+# Match a phone number: 123-456-7890
+phone = digit(3).then('-').then(digit(3)).then('-').then(digit(4))
+
+phone.test('123-456-7890')  # True
+phone.to_regex()            # re.compile(r'\\d{3}-\\d{3}-\\d{4}')`}</CodeBlock>
+              )}
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-3">
-                Or use pre-built patterns
-              </h3>
-              <CodeBlock>{`import { email, url, phone } from 'zeroreg/patterns'
+              <h3 className="text-lg font-semibold mb-3">Or use pre-built patterns</h3>
+              {lang === "js" ? (
+                <CodeBlock>{`import { email, url, phone } from 'zeroreg/patterns'
 
 email.test('hello@world.com')     // true
 url.test('https://github.com')    // true
 phone.test('+1-234-567-8900')     // true`}</CodeBlock>
-            </div>
-          </div>
-        </section>
+              ) : (
+                <CodeBlock>{`from zeroreg.patterns import email, url, phone
 
-        {/* Core Concepts */}
-        <section id="concepts" className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span> Core Concepts
-          </h2>
-
-          <div className="prose prose-invert max-w-none">
-            <p className="text-text-muted text-lg mb-6">
-              zeroReg is built on one simple idea:{" "}
-              <strong className="text-text">
-                regex should read like English
-              </strong>
-              . Every function returns a <code>Pattern</code> object that you
-              can chain, combine, and convert to native RegExp.
-            </p>
-
-            <div className="bg-bg-card border border-border rounded-xl p-6 mb-6">
-              <h4 className="font-semibold mb-3">The Pattern Object</h4>
-              <p className="text-text-muted mb-4">
-                Every builder function returns a Pattern. Patterns are immutable
-                and chainable:
-              </p>
-              <CodeBlock>{`const pattern = digit()      // Create a pattern
-  .oneOrMore()                // Chain quantifier
-  .then('-')                  // Chain more patterns
-  .then(letter().times(3))    // Nest patterns
-
-// Convert to RegExp when ready
-const regex = pattern.toRegex()  // /\\d+-[a-zA-Z]{3}/`}</CodeBlock>
+email.test('hello@world.com')     # True
+url.test('https://github.com')    # True
+phone.test('+1-234-567-8900')     # True`}</CodeBlock>
+              )}
             </div>
           </div>
         </section>
@@ -111,49 +149,23 @@ const regex = pattern.toRegex()  // /\\d+-[a-zA-Z]{3}/`}</CodeBlock>
                 </tr>
               </thead>
               <tbody className="font-mono text-sm">
-                <Row fn="digit()" desc="Any digit 0-9" regex="\\d" />
-                <Row fn="digit(n)" desc="Exactly n digits" regex="\\d{n}" />
-                <Row fn="nonDigit()" desc="Any non-digit" regex="\\D" />
+                <Row fn={lang === "js" ? "digit(n?)" : "digit(n=None)"} desc="Match digits" regex="\\d or \\d{n}" />
                 <Row fn="word()" desc="Word char (a-z, 0-9, _)" regex="\\w" />
-                <Row fn="nonWord()" desc="Non-word char" regex="\\W" />
-                <Row
-                  fn="letter()"
-                  desc="Any letter a-z, A-Z"
-                  regex="[a-zA-Z]"
-                />
-                <Row fn="lowercase()" desc="Lowercase letter" regex="[a-z]" />
-                <Row fn="uppercase()" desc="Uppercase letter" regex="[A-Z]" />
-                <Row
-                  fn="alphanumeric()"
-                  desc="Letter or digit"
-                  regex="[a-zA-Z0-9]"
-                />
+                <Row fn="letter()" desc="Any letter a-z, A-Z" regex="[a-zA-Z]" />
                 <Row fn="whitespace()" desc="Whitespace" regex="\\s" />
-                <Row fn="nonWhitespace()" desc="Non-whitespace" regex="\\S" />
-                <Row fn="any()" desc="Any character" regex="." />
-                <Row
-                  fn="literal(str)"
-                  desc="Exact match (escaped)"
-                  regex="str"
-                />
-                <Row fn="charIn('abc')" desc="Any char in set" regex="[abc]" />
-                <Row
-                  fn="charNotIn('abc')"
-                  desc="Any char NOT in set"
-                  regex="[^abc]"
-                />
-                <Row
-                  fn="range('a', 'z')"
-                  desc="Character range"
-                  regex="[a-z]"
-                />
+                <Row fn={lang === "js" ? "any()" : "any_char()"} desc="Any character" regex="." />
+                <Row fn="literal(str)" desc="Exact match (escaped)" regex="str" />
+                <Row fn={lang === "js" ? "charIn('abc')" : "char_in('abc')"} desc="Any char in set" regex="[abc]" />
+                <Row fn={lang === "js" ? "charNotIn('abc')" : "char_not_in('abc')"} desc="Any char NOT in set" regex="[^abc]" />
+                <Row fn={lang === "js" ? "range('a', 'z')" : "range_of('a', 'z')"} desc="Character range" regex="[a-z]" />
               </tbody>
             </table>
           </div>
 
           <div className="mt-8">
             <h3 className="text-lg font-semibold mb-3">Examples</h3>
-            <CodeBlock>{`import { digit, letter, charIn, literal } from 'zeroreg'
+            {lang === "js" ? (
+              <CodeBlock>{`import { digit, letter, charIn, literal } from 'zeroreg'
 
 // Match exactly 3 digits
 digit(3).test('123')  // true
@@ -162,8 +174,19 @@ digit(3).test('123')  // true
 charIn('aeiou').test('e')  // true
 
 // Match a literal dot (escaped automatically)
-literal('.').test('.')  // true
-literal('.').test('a')  // false`}</CodeBlock>
+literal('.').test('.')  // true`}</CodeBlock>
+            ) : (
+              <CodeBlock>{`from zeroreg import digit, letter, char_in, literal
+
+# Match exactly 3 digits
+digit(3).test('123')  # True
+
+# Match a vowel
+char_in('aeiou').test('e')  # True
+
+# Match a literal dot (escaped automatically)
+literal('.').test('.')  # True`}</CodeBlock>
+            )}
           </div>
         </section>
 
@@ -187,24 +210,20 @@ literal('.').test('a')  // false`}</CodeBlock>
                 </tr>
               </thead>
               <tbody className="font-mono text-sm">
-                <Row fn=".oneOrMore()" desc="1 or more" regex="+" />
-                <Row fn=".zeroOrMore()" desc="0 or more" regex="*" />
+                <Row fn={lang === "js" ? ".oneOrMore()" : ".one_or_more()"} desc="1 or more" regex="+" />
+                <Row fn={lang === "js" ? ".zeroOrMore()" : ".zero_or_more()"} desc="0 or more" regex="*" />
                 <Row fn=".optional()" desc="0 or 1" regex="?" />
                 <Row fn=".times(n)" desc="Exactly n times" regex="{n}" />
-                <Row
-                  fn=".between(min, max)"
-                  desc="Between min and max"
-                  regex="{min,max}"
-                />
-                <Row fn=".atLeast(n)" desc="n or more times" regex="{n,}" />
-                <Row fn=".atMost(n)" desc="0 to n times" regex="{0,n}" />
+                <Row fn={lang === "js" ? ".between(min, max)" : ".between(min, max)"} desc="Between min and max" regex="{min,max}" />
+                <Row fn={lang === "js" ? ".atLeast(n)" : ".at_least(n)"} desc="n or more times" regex="{n,}" />
               </tbody>
             </table>
           </div>
 
           <div className="mt-8">
             <h3 className="text-lg font-semibold mb-3">Examples</h3>
-            <CodeBlock>{`import { digit, letter, optional } from 'zeroreg'
+            {lang === "js" ? (
+              <CodeBlock>{`import { digit, letter, optional } from 'zeroreg'
 
 // One or more digits
 digit().oneOrMore().test('123')  // true
@@ -215,6 +234,19 @@ optional('+').then(digit().oneOrMore()).test('123')   // true
 
 // Between 2 and 4 letters
 letter().between(2, 4).test('abc')  // true`}</CodeBlock>
+            ) : (
+              <CodeBlock>{`from zeroreg import digit, letter, optional
+
+# One or more digits
+digit().one_or_more().test('123')  # True
+
+# Optional plus sign, then digits
+optional('+').then(digit().one_or_more()).test('+123')  # True
+optional('+').then(digit().one_or_more()).test('123')   # True
+
+# Between 2 and 4 letters
+letter().between(2, 4).test('abc')  # True`}</CodeBlock>
+            )}
           </div>
         </section>
 
@@ -238,33 +270,18 @@ letter().between(2, 4).test('abc')  // true`}</CodeBlock>
                 </tr>
               </thead>
               <tbody className="font-mono text-sm">
-                <Row
-                  fn="capture(pattern)"
-                  desc="Capturing group"
-                  regex="(...)"
-                />
-                <Row
-                  fn="capture(pattern, 'name')"
-                  desc="Named capture"
-                  regex="(?<name>...)"
-                />
-                <Row
-                  fn="group(pattern)"
-                  desc="Non-capturing group"
-                  regex="(?:...)"
-                />
-                <Row
-                  fn="oneOf(a, b, c)"
-                  desc="Match any of"
-                  regex="(?:a|b|c)"
-                />
+                <Row fn="capture(pattern)" desc="Capturing group" regex="(...)" />
+                <Row fn="capture(pattern, 'name')" desc="Named capture" regex={lang === "js" ? "(?<n>...)" : "(?P<n>...)"} />
+                <Row fn="group(pattern)" desc="Non-capturing group" regex="(?:...)" />
+                <Row fn={lang === "js" ? "oneOf(a, b, c)" : "one_of(a, b, c)"} desc="Match any of" regex="(?:a|b|c)" />
               </tbody>
             </table>
           </div>
 
           <div className="mt-8">
             <h3 className="text-lg font-semibold mb-3">Examples</h3>
-            <CodeBlock>{`import { capture, digit, oneOf, group } from 'zeroreg'
+            {lang === "js" ? (
+              <CodeBlock>{`import { capture, digit, oneOf, group, literal } from 'zeroreg'
 
 // Extract year, month, day
 const datePattern = capture(digit(4), 'year')
@@ -279,10 +296,27 @@ match.groups.month  // '03'
 match.groups.day    // '15'
 
 // Match "cat" or "dog" or "bird"
-oneOf('cat', 'dog', 'bird').test('dog')  // true
+oneOf('cat', 'dog', 'bird').test('dog')  // true`}</CodeBlock>
+            ) : (
+              <CodeBlock>{`from zeroreg import capture, digit, one_of, group, literal
 
-// Group without capturing (for quantifiers)
-group(literal('ab').or('cd')).oneOrMore().test('abcdab')  // true`}</CodeBlock>
+# Extract year, month, day
+date_pattern = (
+    capture(digit(4), 'year')
+    .then('-')
+    .then(capture(digit(2), 'month'))
+    .then('-')
+    .then(capture(digit(2), 'day'))
+)
+
+match = date_pattern.match('2024-03-15')
+match.group('year')   # '2024'
+match.group('month')  # '03'
+match.group('day')    # '15'
+
+# Match "cat" or "dog" or "bird"
+one_of('cat', 'dog', 'bird').test('dog')  # True`}</CodeBlock>
+            )}
           </div>
         </section>
 
@@ -306,119 +340,12 @@ group(literal('ab').or('cd')).oneOrMore().test('abcdab')  // true`}</CodeBlock>
                 </tr>
               </thead>
               <tbody className="font-mono text-sm">
-                <Row fn="startOfLine()" desc="Start of string" regex="^" />
-                <Row fn="endOfLine()" desc="End of string" regex="$" />
-                <Row fn="wordBoundary()" desc="Word boundary" regex="\\b" />
-                <Row
-                  fn="nonWordBoundary()"
-                  desc="Non-word boundary"
-                  regex="\\B"
-                />
+                <Row fn={lang === "js" ? "startOfLine()" : "start_of_line()"} desc="Start of string" regex="^" />
+                <Row fn={lang === "js" ? "endOfLine()" : "end_of_line()"} desc="End of string" regex="$" />
+                <Row fn={lang === "js" ? "wordBoundary()" : "word_boundary()"} desc="Word boundary" regex="\\b" />
               </tbody>
             </table>
           </div>
-
-          <div className="mt-8">
-            <h3 className="text-lg font-semibold mb-3">Examples</h3>
-            <CodeBlock>{`import { startOfLine, endOfLine, literal, digit, wordBoundary } from 'zeroreg'
-
-// Match "hello" at start of string
-startOfLine().then(literal('hello')).test('hello world')  // true
-startOfLine().then(literal('hello')).test('say hello')    // false
-
-// Match exactly 3 digits (nothing more)
-startOfLine().then(digit(3)).then(endOfLine()).test('123')   // true
-startOfLine().then(digit(3)).then(endOfLine()).test('1234')  // false
-
-// Match whole word "cat" (not "category")
-wordBoundary().then(literal('cat')).then(wordBoundary())
-  .toRegex().test('the cat sat')  // true`}</CodeBlock>
-          </div>
-        </section>
-
-        {/* Lookahead & Lookbehind */}
-        <section id="lookaround" className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span> Lookahead & Lookbehind
-          </h2>
-
-          <p className="text-text-muted mb-8">
-            Assert what comes before or after without including it in the match.
-          </p>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="py-3 pr-6 font-semibold">Function</th>
-                  <th className="py-3 pr-6 font-semibold">Description</th>
-                  <th className="py-3 font-semibold">Regex</th>
-                </tr>
-              </thead>
-              <tbody className="font-mono text-sm">
-                <Row
-                  fn="lookahead(pattern)"
-                  desc="Followed by"
-                  regex="(?=...)"
-                />
-                <Row
-                  fn="negativeLookahead(pattern)"
-                  desc="NOT followed by"
-                  regex="(?!...)"
-                />
-                <Row
-                  fn="lookbehind(pattern)"
-                  desc="Preceded by"
-                  regex="(?<=...)"
-                />
-                <Row
-                  fn="negativeLookbehind(pattern)"
-                  desc="NOT preceded by"
-                  regex="(?<!...)"
-                />
-              </tbody>
-            </table>
-          </div>
-
-          <div className="mt-8">
-            <h3 className="text-lg font-semibold mb-3">Examples</h3>
-            <CodeBlock>{`import { digit, lookahead, lookbehind, literal } from 'zeroreg'
-
-// Match digits followed by "px"
-digit().oneOrMore().then(lookahead(literal('px')))
-  .toRegex().exec('100px')  // ['100']
-
-// Match digits preceded by "$"
-lookbehind(literal('$')).then(digit().oneOrMore())
-  .toRegex().exec('$500')  // ['500']`}</CodeBlock>
-          </div>
-        </section>
-
-        {/* Chaining */}
-        <section id="chaining" className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span> Chaining with .then()
-          </h2>
-
-          <p className="text-text-muted mb-8">
-            The <code>.then()</code> method lets you chain patterns together
-            sequentially.
-          </p>
-
-          <CodeBlock>{`import { digit, literal, letter, optional } from 'zeroreg'
-
-// Build complex patterns step by step
-const productCode = literal('PRD')
-  .then('-')
-  .then(digit(4))
-  .then('-')
-  .then(letter().times(2))
-
-productCode.test('PRD-1234-AB')  // true
-productCode.toRegex()            // /PRD-\\d{4}-[a-zA-Z]{2}/
-
-// .then() accepts strings (auto-escaped) or patterns
-digit(3).then('.').then(digit(3))  // Matches "123.456"`}</CodeBlock>
         </section>
 
         {/* Output Methods */}
@@ -440,43 +367,24 @@ digit(3).then('.').then(digit(3))  // Matches "123.456"`}</CodeBlock>
                 </tr>
               </thead>
               <tbody className="font-mono text-sm">
-                <Row
-                  fn=".toRegex(flags?)"
-                  desc="Native RegExp object"
-                  regex=""
-                />
-                <Row
-                  fn=".test(string)"
-                  desc="boolean — does it match?"
-                  regex=""
-                />
-                <Row fn=".match(string)" desc="First match or null" regex="" />
-                <Row
-                  fn=".matchAll(string)"
-                  desc="Array of all matches"
-                  regex=""
-                />
-                <Row
-                  fn=".replace(string, replacement)"
-                  desc="String with replacements"
-                  regex=""
-                />
-                <Row fn=".toString()" desc="Regex pattern string" regex="" />
+                <Row fn={lang === "js" ? ".toRegex(flags?)" : ".to_regex(flags=0)"} desc={lang === "js" ? "Native RegExp object" : "Compiled re.Pattern"} regex="" />
+                <Row fn=".test(str)" desc="boolean — does it match?" regex="" />
+                <Row fn=".match(str)" desc="First match or null/None" regex="" />
+                <Row fn={lang === "js" ? ".matchAll(str)" : ".match_all(str)"} desc="Array/list of all matches" regex="" />
+                <Row fn=".replace(str, replacement)" desc="String with replacements" regex="" />
               </tbody>
             </table>
           </div>
 
           <div className="mt-8">
             <h3 className="text-lg font-semibold mb-3">Examples</h3>
-            <CodeBlock>{`import { digit } from 'zeroreg'
+            {lang === "js" ? (
+              <CodeBlock>{`import { digit } from 'zeroreg'
 
 const pattern = digit().oneOrMore()
 
 // Test if string matches
 pattern.test('abc123')  // true
-
-// Get first match
-pattern.match('abc 123 def 456')  // ['123']
 
 // Get all matches
 pattern.matchAll('abc 123 def 456')  // [['123'], ['456']]
@@ -485,10 +393,24 @@ pattern.matchAll('abc 123 def 456')  // [['123'], ['456']]
 pattern.replace('abc 123 def 456', 'X')  // 'abc X def X'
 
 // Get native RegExp with flags
-pattern.toRegex('gi')  // /\\d+/gi
+pattern.toRegex('gi')  // /\\d+/gi`}</CodeBlock>
+            ) : (
+              <CodeBlock>{`from zeroreg import digit
 
-// Get pattern string
-pattern.toString()  // '\\d+'`}</CodeBlock>
+pattern = digit().one_or_more()
+
+# Test if string matches
+pattern.test('abc123')  # True
+
+# Get all matches
+pattern.match_all('abc 123 def 456')  # ['123', '456']
+
+# Replace all matches
+pattern.replace('abc 123 def 456', 'X')  # 'abc X def X'
+
+# Get compiled regex
+pattern.to_regex()  # re.compile(r'\\d+')`}</CodeBlock>
+            )}
           </div>
         </section>
 
@@ -502,7 +424,11 @@ pattern.toString()  // '\\d+'`}</CodeBlock>
             Import ready-to-use patterns for common use cases.
           </p>
 
-          <CodeBlock>{`import { email, url, phone, date, uuid, ... } from 'zeroreg/patterns'`}</CodeBlock>
+          {lang === "js" ? (
+            <CodeBlock>{`import { email, url, phone, date, uuid, ... } from 'zeroreg/patterns'`}</CodeBlock>
+          ) : (
+            <CodeBlock>{`from zeroreg.patterns import email, url, phone, date, uuid, ...`}</CodeBlock>
+          )}
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <PatternCard name="email" example="user@domain.com" />
@@ -511,121 +437,17 @@ pattern.toString()  // '\\d+'`}</CodeBlock>
             <PatternCard name="date" example="2024-03-15" />
             <PatternCard name="time" example="14:30:00" />
             <PatternCard name="ipv4" example="192.168.1.1" />
-            <PatternCard name="ipv6" example="2001:0db8:..." />
             <PatternCard name="uuid" example="550e8400-e29b-..." />
-            <PatternCard name="hexColor" example="#ff6600" />
-            <PatternCard name="hex" example="a1b2c3" />
+            <PatternCard name={lang === "js" ? "hexColor" : "hex_color"} example="#ff6600" />
             <PatternCard name="slug" example="my-post-title" />
             <PatternCard name="hashtag" example="#trending" />
             <PatternCard name="mention" example="@username" />
-            <PatternCard name="creditCard" example="4111111111111111" />
-            <PatternCard name="ssn" example="123-45-6789" />
-            <PatternCard name="zipCode" example="12345-6789" />
+            <PatternCard name={lang === "js" ? "creditCard" : "credit_card"} example="4111111111111111" />
             <PatternCard name="username" example="user_123" />
-            <PatternCard name="strongPassword" example="MyP@ssw0rd" />
+            <PatternCard name={lang === "js" ? "strongPassword" : "strong_password"} example="MyP@ssw0rd" />
             <PatternCard name="semver" example="1.2.3-alpha" />
-            <PatternCard name="macAddress" example="00:1A:2B:3C:4D:5E" />
+            <PatternCard name={lang === "js" ? "macAddress" : "mac_address"} example="00:1A:2B:3C:4D:5E" />
           </div>
-        </section>
-
-        {/* Real World Examples */}
-        <section id="examples" className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span> Real World Examples
-          </h2>
-
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-3">
-                Phone Number with Optional Country Code
-              </h3>
-              <CodeBlock>{`import { digit, optional } from 'zeroreg'
-
-const phone = optional('+')
-  .then(digit(3))
-  .then('-')
-  .then(digit(3))
-  .then('-')
-  .then(digit(4))
-
-phone.test('123-456-7890')   // true
-phone.test('+123-456-7890')  // true`}</CodeBlock>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-3">Extract Date Parts</h3>
-              <CodeBlock>{`import { digit, capture } from 'zeroreg'
-
-const datePattern = capture(digit(4), 'year')
-  .then('-')
-  .then(capture(digit(2), 'month'))
-  .then('-')
-  .then(capture(digit(2), 'day'))
-
-const match = '2024-03-15'.match(datePattern.toRegex())
-console.log(match.groups)
-// { year: '2024', month: '03', day: '15' }`}</CodeBlock>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-3">
-                Password Validation
-              </h3>
-              <CodeBlock>{`import { startOfLine, endOfLine, any, digit, letter, lookahead, charIn } from 'zeroreg'
-
-const password = startOfLine()
-  .then(lookahead(any().zeroOrMore().then(digit())))       // has digit
-  .then(lookahead(any().zeroOrMore().then(letter())))      // has letter
-  .then(lookahead(any().zeroOrMore().then(charIn('@$!%*?&')))) // has special
-  .then(any().between(8, 32))
-  .then(endOfLine())
-
-password.test('MyP@ssw0rd')  // true
-password.test('weakpass')    // false`}</CodeBlock>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-3">Match Prices</h3>
-              <CodeBlock>{`import { literal, digit, lookbehind } from 'zeroreg'
-
-// Match price amount after "$"
-const price = lookbehind(literal('$'))
-  .then(digit().oneOrMore())
-  .then(literal('.').then(digit(2)).optional())
-
-const matches = price.matchAll('Items: $10, $25.99, $100.00')
-// ['10'], ['25.99'], ['100.00']`}</CodeBlock>
-            </div>
-          </div>
-        </section>
-
-        {/* TypeScript */}
-        <section id="typescript" className="mb-20">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-            <span className="text-text-muted">#</span> TypeScript
-          </h2>
-
-          <p className="text-text-muted mb-8">
-            Full TypeScript support out of the box. All functions are fully
-            typed.
-          </p>
-
-          <CodeBlock>{`import { digit, capture, type Pattern } from 'zeroreg'
-
-// Pattern type
-const phone: Pattern = digit(3).then('-').then(digit(4))
-
-// Named captures are type-safe
-const date = capture(digit(4), 'year')
-  .then('-')
-  .then(capture(digit(2), 'month'))
-
-const regex = date.toRegex()
-const match = '2024-03'.match(regex)
-
-if (match?.groups) {
-  const { year, month } = match.groups  // TypeScript knows these exist
-}`}</CodeBlock>
         </section>
 
         {/* Footer */}
@@ -636,16 +458,28 @@ if (match?.groups) {
             </p>
             <div className="flex gap-6">
               <a
-                href="https://github.com/zenweb3/zeroreg-landing"
+                href="https://github.com/yourusername/zeroreg"
                 className="text-sm text-text-muted hover:text-text transition-colors"
               >
-                GitHub
+                GitHub (JS)
+              </a>
+              <a
+                href="https://github.com/yourusername/zeroreg-py"
+                className="text-sm text-text-muted hover:text-text transition-colors"
+              >
+                GitHub (Python)
               </a>
               <a
                 href="https://npmjs.com/package/zeroreg"
                 className="text-sm text-text-muted hover:text-text transition-colors"
               >
                 npm
+              </a>
+              <a
+                href="https://pypi.org/project/zeroreg"
+                className="text-sm text-text-muted hover:text-text transition-colors"
+              >
+                PyPI
               </a>
               <Link
                 href="/"
