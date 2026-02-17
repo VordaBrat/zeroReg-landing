@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-32 pb-16 max-w-4xl mx-auto">
       {/* Language badges */}
-      <div className="flex items-center gap-3 mb-8">
+      {/* <div className="flex items-center gap-3 mb-8">
         <span className="px-3 py-1.5 text-xs font-medium tracking-wide rounded-full bg-bg-card border border-border text-text-muted">
           JavaScript
         </span>
@@ -16,7 +16,7 @@ export function Hero() {
         <span className="px-3 py-1.5 text-xs font-medium tracking-wide rounded-full bg-bg-card border border-border text-text-muted">
           Python
         </span>
-      </div>
+      </div> */}
       
       <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-6">
         Regex was a mistake,

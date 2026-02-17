@@ -12,10 +12,10 @@ export function Navbar() {
         </Link>
 
         {/* Links */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link
             href={DOCS_URL}
-            className="text-sm text-text-muted hover:text-text transition-colors"
+            className="text-sm text-text-muted hover:text-text transition-colors hidden sm:block"
           >
             Docs
           </Link>
@@ -23,7 +23,7 @@ export function Navbar() {
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-text-muted hover:text-text transition-colors"
+            className="text-sm text-text-muted hover:text-text transition-colors hidden sm:block"
           >
             GitHub
           </a>
@@ -33,10 +33,11 @@ export function Navbar() {
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-2 rounded-md text-sm font-medium border border-gold text-gold bg-gold-dim hover:bg-gold hover:text-bg transition-all"
+            className="flex items-center gap-2 px-4 sm:px-6 py-2 rounded-md text-sm font-medium border border-gold text-gold bg-gold-dim hover:bg-gold hover:text-bg transition-all"
           >
             <StarIcon />
-            Star on GitHub
+            <span className="hidden sm:inline">Star on GitHub</span>
+            <span className="sm:hidden">Star</span>
           </a>
         </div>
       </div>
