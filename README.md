@@ -1,6 +1,6 @@
 # zeroreg Landing Page
 
-Marketing site for [zeroReg](https://npmjs.com/package/zeroreg) — a human-readable regex builder for JavaScript, TypeScript & Python.
+Marketing site for [zeroReg](https://npmjs.com/package/zeroreg) — A human-readable regex builder for JavaScript, TypeScript & Python.
 
 🔗 **Live:** [zeroreg.xyz](https://zeroreg.xyz)
 
