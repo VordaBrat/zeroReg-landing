@@ -24,6 +24,6 @@ pnpm dev
 - [Package repo for Javascript/Typescript](https://github.com/zenweb3/zeroreg)
 - [Package repo for Python](https://pypi.org/package/zeroreg-py/)
 
-## License
+##  License
 
 MIT
